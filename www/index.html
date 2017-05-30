@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ProCity</title>  
+
+        <link rel="stylesheet" href="css/themes/procity-theme.min.css" />
+        <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="css/jquery/jquery.mobile.structure-1.4.5.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+        <script src="js/jquery/jquery-1.11.3.min.js"></script>        
+        <script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/jquery/jquery.mobile.utils.js"></script>        
+                              
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9CVLl4NC6c6IZJ4hMgD8RJB9RRzkj8_8"></script>        
+        <script type="text/javascript" src="js/md5/jquery.md5.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript" src="js/index.js"></script>
+        <div id="loginPage" data-role="page" data-title="Autenticação">    
+  
+            <div data-role="main" class="ui-content">    
+
+                <form id="loginForm">
+
+                    <div id="logo" class="logo">
+                        <center>
+                            <img src="img/logo.png" data-fullsrc="img/logo_full.png">
+                        </center>                       
+                    </div>        
+
+                    <div id="bem-vindo"> 
+                        <center>
+                            <h1 style="color:#0098DA">Olá Cidadão</h1>
+                            <p>Ajude o gestor da sua cidade a melhora-lá.</p>
+                            <p>Envie ocorrências diretamente a prefeitura e fique por dentro do seu andamento</p>
+                        </center>
+                    </div>
+                                
+                    <div id="botoes" class="botoes">
+                        <center>
+                            <a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Login</a>                            
+                             <a href="#popupCadastrar" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-a" data-transition="pop">Cadastrar</a>
+
+                              <a href="#" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-plus ui-btn-icon-left ui-btn-a" data-transition="pop" onclick="entrar()">Entrar</a>
+                        </center>
+                    </div>
+
+
+                    <div data-role="popup" id="popupLogin" data-theme="a" data-dismissible="false" class="ui-corner-all" >
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
+                        <form>
+                            <div style="padding:10px 20px;">
+                                <h3>Realize o seu login</h3>
+                                <label for="email" class="ui-hidden-accessible">E-mail:</label>
+                                <input type="text" name="email" id="email" value="" placeholder="E-mail" data-theme="a">
+                                <label for="senha" class="ui-hidden-accessible">Senha:</label>
+                                <input type="password" name="senha" id="senha" value="" placeholder="Senha" data-theme="a">
+
+                                <a href="#" onclick="realizaLogin()" data-theme="a" data-role="button" id="login">Login</a>  
+                            </div>
+                        </form>
+                    </div>
+
+                    <div data-role="popup" id="popupCadastrar" data-theme="a" data-dismissible="false" class="ui-corner-all">
+                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
+                        <form>
+                            <div style="padding:10px 20px;">
+                                <h3>Realize o seu Cadastro</h3>
+                               <label for="nomeCad" class="ui-hidden-accessible">Nome Completo:</label>
+                                <input type="text" name="nomeCad" id="nmCad" value="" placeholder="Nome Completo" data-theme="a">                    
+                                <label for="unCad" class="ui-hidden-accessible">E-mail:</label>
+                                <input type="text" name="emailCad" id="unCad" value="" placeholder="E-mail" data-theme="a">
+                                <label for="pwCad" class="ui-hidden-accessible">Senha:</label>
+                                <input type="password" name="senhaCad" id="pwCad" value="" placeholder="Senha" data-theme="a">
+                                <a href="#" onclick="realizaCadastro()" data-theme="a" data-role="button" id="login">Cadastrar</a>  
+                            </div>
+                        </form>
+                    </div>                    
+
+
+
+                </form>                
+            </div>     
+        </div>       
+
+    </body>
+</html>

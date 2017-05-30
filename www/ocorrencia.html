@@ -1,0 +1,37 @@
+<div data-role="page" id="ocorrencia" data-theme="a">
+  
+  <div data-role="header" data-position="fixed" data-theme="a">    
+    <h1>Minhas Ocorrências</h1>    
+  </div>
+
+  <div data-role="main" class="ui-content" data-theme="a"  id="content">
+    
+      <ul id="listaMinhasOcorrencias" data-role="listview" data-filter="true" data-filter-placeholder="Pesquisar" data-inset="true" data-split-theme="a" data-theme="a" data-divider-theme="a" data-count-theme="a" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+      </ul>
+    
+  </div>
+
+ 
+    <div data-role="footer" data-position="fixed" data-theme="a">
+        <div data-role="navbar">
+            <ul>                  
+                <li>
+                  <a href="inicial.html" data-transaction="fade" data-icon="navigation" class="ui-icon-navigation">Mapa</a>
+                </li>               
+                <li>
+                  <a href="#" data-transaction="fade" data-icon="bullets" class="ui-icon-bullets">Minhas Ocorrências</a>
+                </li>                  
+                <li>
+                    <a href="#popupNovaOcorrencia" data-rel="popup" data-icon="plus" data-position-to="window" class="ui-icon-plus" data-transition="pop">Nova Ocorrência</a>                  
+                </li>
+                <li>
+                  <a href="sobre.html" data-transaction="fade" data-icon="info" class="ui-icon-info">Sobre</a>
+                </li>
+                <li>
+                  <a href="#" data-transaction="fade" data-icon="check" onclick="sair()" class="ui-icon-check">Sair</a>
+                </li> 
+            </ul>              
+        </div>
+    </div>
+</div>
+

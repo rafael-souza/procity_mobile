@@ -1,0 +1,104 @@
+/* Basic styles */
+
+/* Stack all blocks to start */
+.cw-responsive .ui-block-a,
+.cw-responsive .ui-block-b,
+.cw-responsive .ui-block-c {
+    width: 100%;
+    float: left;
+    text-align: left;
+    padding: 5px;
+}
+
+.cw-dynamic-heigth {
+  height: 110px;
+}    
+
+/* Collapsing borders */
+.cw-responsive > div + div .ui-body {
+    border-top-width: 0;
+}
+/* 1st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 42em) {
+    .cw-responsive {
+        overflow: hidden; /* Use this or a "clearfix" to give the container height */
+    }
+    
+    .cw-responsive .ui-block-b,
+    .cw-responsive .ui-block-c {      
+      float: left;
+      width: 49.95%;
+    }
+    .cw-responsive .ui-block-b p,
+    .cw-responsive .ui-block-c p {
+      font-size: .8em;
+    }
+
+    .cw-dynamic-heigth{
+      height: 110px;
+    }    
+
+    h2:after{content:""; display:block; clear:both}
+}
+
+/* 2st breakpoint - Float B and C, leave A full width on top */
+@media all and (min-width: 48em) {
+    .cw-responsive .ui-block-b,
+    .cw-responsive .ui-block-c {     
+      float: left;
+      width: 29.95%;
+    }
+    .cw-responsive .ui-block-b p,
+    .cw-responsive .ui-block-c p {
+      font-size: .8em;
+    }
+
+    .cw-dynamic-heigth{
+      height: 110px;
+    }    
+
+    h2:after{content:""; display:block; clear:both}
+}
+
+
+/* 3nd breakpoint - Float all, 50/25/25 */
+@media all and (min-width: 55em) {
+    .cw-responsive .ui-block-a,
+    .cw-responsive .ui-block-c {      
+      float: left;
+      width: 49.95%;
+    }
+    .cw-responsive .ui-block-b,
+    .cw-responsive .ui-block-c {     
+      float: left;
+      width: 24.925%;
+    }
+
+    .cw-dynamic-heigth{
+      height: 110px;
+    }    
+
+    h2:after{content:""; display:block; clear:both}
+}
+/* 4rd breakpoint - Bump up font size at very wide screens */
+@media all and (min-width: 75em) {
+    .cw-responsive .ui-body {
+      font-size: 125%;
+    }
+    .cw-responsive .ui-block-a,
+    .cw-responsive .ui-block-c {      
+      float: left;
+      width: 49.95%;
+    }
+    .cw-responsive .ui-block-b,
+    .cw-responsive .ui-block-c {      
+      float: left;
+      width: 24.925%;
+    }
+
+    .cw-dynamic-heigth{
+      height: 110px;
+    }
+
+    h2:after{content:""; display:block; clear:both}     
+}
