@@ -167,18 +167,16 @@ html, body {
 .ui-listview .ui-li-has-thumb > img:first-child,
 .ui-listview .ui-li-has-thumb > .ui-btn > img:first-child,
 .ui-listview .ui-li-has-thumb .ui-li-thumb {
-    max-height: 8.25em !important;
-    max-width: 8.25em !important;
+    max-height: 10.25em !important;
+    max-width: 9.25em !important;
+    padding-left: 2em !important;
+    padding-top: 1em !important;
 }
 
 .ui-listview>.ui-li-has-thumb>.ui-btn, .ui-listview>.ui-li-static.ui-li-has-thumb {
     min-height: 4.625em;
-    padding-left: 9.25em !important;
-}
-
-.cw-responsive .ui-input-text {
-    height: 40px !important;
-    font-size: 18px !important;
+    padding-left: 12.5em !important;
+    padding-top: 1em !important;
 }
 
 #loginForm .ui-input-text {
@@ -186,40 +184,74 @@ html, body {
     font-size: 18px !important;
 }
 
-#imovelSel .ui-input-search{
+#loginPage {
+    background:url(../img/back_img.png);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.ui-input-search{
     height: 40px !important;
     font-size: 18px !important;    
 }
 
-.cw-listview-li-count{
-   border-radius: 12px !important;
+.gm-style-iw {
+    width: 350px !important;
+    top: 15px !important;
+    left: 0px !important;
+    background-color: #fff;
+    box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+    border: 1px solid rgba(72, 181, 233, 0.6);
+    border-radius: 2px 2px 10px 10px;
 }
-
-.cw-li-count{       
-    /* border-width: 2px !important; */
-    border-radius: 50% !important;
-    font-size: 15px !important;
-    background-color: red;
-    /* border-color: white; */
-    /* top: 1.2em; */
+#iw-container {
+    margin-bottom: 10px;
+    width: 100%;
+}
+#iw-container .iw-title {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 10px;
+    background-color: #48b5e9;
     color: white;
-    text-shadow: 0 1px 0 #111;
-    /* float: left !important; */
-    /* left: 52% !important; */
-    /* right: 40% !important; */
-    z-index: 99 !important;
+    margin: 0;
+    border-radius: 2px 2px 0 0;
+}
+#iw-container .iw-content {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    margin-right: 1px;
+    padding: 15px 5px 20px 15px;
+    max-height: 140px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.iw-content img {
+    float: right;
+    margin: 0 5px 5px 10px; 
+}
+.iw-subTitle {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px 0;
+}
+.iw-bottom-gradient {
+    position: absolute;
+    width: 326px;
+    height: 25px;
+    bottom: 10px;
+    right: 18px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
 }
 
-.cw-alterado{
-    color : red !important;
-}
-
-.cw-nao-alterado{
-    color : black !important;
-}
-
-.cw-valor-cti {
-    color: silver;
-    font-style: italic;
-    font-weight: bold;    
+.ui-input-text {
+    height: 40px !important;
+    font-size: 18px !important;
 }

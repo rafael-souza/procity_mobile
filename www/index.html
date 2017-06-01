@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ProCity</title>  
-
+        <link rel="shortcut icon" href="../img/favicon.ico">
         <link rel="stylesheet" href="css/themes/procity-theme.min.css" />
         <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
         <link rel="stylesheet" href="css/jquery/jquery.mobile.structure-1.4.5.min.css" />
@@ -18,8 +18,12 @@
         <script type="text/javascript" src="js/md5/jquery.md5.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
     </head>
-    <body>
+    <body>    
         <script type="text/javascript" src="js/index.js"></script>
+        <div data-role="header" data-position="fixed" data-theme="a">   
+            <a href="../toolbar/" data-rel="back" class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-carat-l ui-btn-icon-notext ui-shadow">Back</a> 
+            <h1>Minhas Ocorrências</h1>    
+        </div>        
         <div id="loginPage" data-role="page" data-title="Autenticação">    
   
             <div data-role="main" class="ui-content">    
@@ -54,7 +58,7 @@
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
                         <form>
                             <div style="padding:10px 20px;">
-                                <h3>Realize o seu login</h3>
+                                <h3>REALIZE O SEU LOGIN</h3>
                                 <label for="email" class="ui-hidden-accessible">E-mail:</label>
                                 <input type="text" name="email" id="email" value="" placeholder="E-mail" data-theme="a">
                                 <label for="senha" class="ui-hidden-accessible">Senha:</label>
@@ -69,13 +73,17 @@
                     <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
                         <form>
                             <div style="padding:10px 20px;">
-                                <h3>Realize o seu Cadastro</h3>
-                               <label for="nomeCad" class="ui-hidden-accessible">Nome Completo:</label>
-                                <input type="text" name="nomeCad" id="nmCad" value="" placeholder="Nome Completo" data-theme="a">                    
-                                <label for="unCad" class="ui-hidden-accessible">E-mail:</label>
-                                <input type="text" name="emailCad" id="unCad" value="" placeholder="E-mail" data-theme="a">
+                                <center>
+                                    <h3 style="color: green">REALIZE O SEU CADASTRO</h3>                                    
+                                    <h3>Cadastre-se e faça sua parte para contribuir com sua cidade</h3>
+                                </center>
+                                <label for="nomeCad" class="ui-hidden-accessible">Nome Completo:</label>
+                                <input type="text" name="nomeCad" id="nomeCad" value="" placeholder="Nome Completo" data-theme="a">                    
+                                <label for="emailCad" class="ui-hidden-accessible">E-mail:</label>
+                                <input type="text" name="emailCad" id="emailCad" value="" placeholder="E-mail" data-theme="a">
                                 <label for="pwCad" class="ui-hidden-accessible">Senha:</label>
-                                <input type="password" name="senhaCad" id="pwCad" value="" placeholder="Senha" data-theme="a">
+                                <input type="password" name="senhaCad" id="senhaCad" value="" placeholder="Senha" data-theme="a">
+                                                                                       
                                 <a href="#" onclick="realizaCadastro()" data-theme="a" data-role="button" id="login">Cadastrar</a>  
                             </div>
                         </form>
@@ -84,8 +92,28 @@
 
 
                 </form>                
-            </div>     
+            </div>    
         </div>       
-
+<div data-role="footer" data-position="fixed" data-theme="a" role="contentinfo" class="ui-footer ui-bar-a ui-footer-fixed slideup"> 
+        <div data-role="navbar" class="ui-navbar" role="navigation">
+            <ul>                  
+                <li>
+                  <a href="inicial.html" data-prefetch="true" data-transition="slidefade" data-icon="navigation" class="ui-btn ui-icon-navigation">Mapa de Ocorrências</a>
+                </li>               
+                <li>
+                  <a href="ocorrencia.html" data-prefetch="true"  data-transition="slidefade" data-icon="bullets" class="ui-btn ui-icon-bullets">Minhas Ocorrências</a>
+                </li>                  
+                <li>
+                    <a href="novaOcorrencia.html" data-prefetch="true"  data-transition="slidefade" data-icon="plus" class="ui-btn ui-icon-plus">Nova Ocorrência</a>               
+                </li>
+                <li>
+                  <a href="sobre.html" data-prefetch="true" data-transition="slidefade" data-icon="info" class="ui-btn ui-icon-info">Sobre</a>
+                </li>
+                <li>
+                  <a href="#" data-transition="slidefade" data-icon="check" onclick="sair()" class="ui-btn ui-icon-check">Sair</a>
+                </li> 
+            </ul>              
+        </div>
+    </div>
     </body>
 </html>

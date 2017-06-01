@@ -27,10 +27,16 @@
         },
         "cordova-plugin-sim": {
             "PACKAGE_NAME": "br.net.proex"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "br.net.proex"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "br.net.proex"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "br.net.proex"
         }
     }

@@ -1,0 +1,33 @@
+<div data-role="page" id="novaOcorrencia" data-theme="a" data-title="Nova Ocorrência">
+  	<div data-role="main" class="ui-content" data-theme="a" id="content">    
+  		<h2>Dados da Ocorrência:</h2>
+        
+
+		<div data-controltype='selectmenu'> 
+			<label for="tipoOcorrencia">Tipo:</label>
+        	<select id="tipoOcorrencia" data-native-menu='false' data-theme='b'></select>
+        </div>                
+        <div >    
+            <label for="endereco">Endereço:</label>
+            <input id="endereco" type="text">           
+        </div>          
+
+        <div >        
+            <label for="observacao">O que está acontecendo?</label>
+            <textarea id="observacao" style="height: 100px !important;"></textarea>
+        </div>  
+
+	    <div >            
+	    	<label for="fotoOcorrencia">Envie uma foto do problema:</label>
+	    	<center>
+            	<span id="fotoOcorrencia" onclick="manipulaFoto(this)"></span>                 
+            </center>
+        </div>
+
+		<div data-theme="a" style="text-align:center;"> 
+        	<a href="#" onclick="enviarOcorrencia()" data-icon="action" data-role="button">Enviar Ocorrência</a>           
+    	</div>              
+    </div>   
+</div>
+
+
