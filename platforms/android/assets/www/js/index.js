@@ -16,11 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var urlSync = 'http://10.0.0.101:8080/procity/soa/service/mobile.';
+var urlSync = 'http://10.0.0.103:8080/procity/soa/service/mobile.';
 var listaOcorrencias = [];
 var listaTipoOcorrencias = [];
 var map;
 var enderecoOcorrencia = "";
+var latitude = "";
+var longitude = "";
 var app = {
     // Application Constructor
     initialize: function() {
@@ -81,6 +83,8 @@ $(document).on("pageshow", "#inicial", function() {
     var defaultLatLng = new google.maps.LatLng(-21.292855, -46.685126);  // Default to Formiga/MG, CA when no geolocation support -20.462245, -45.430365
     if ( navigator.geolocation ) {      
         function success(pos) {
+            latitude = pos.coords.latitude;
+            longitude = pos.coords.longitude;
             // pegando o endereço            
             var latlng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
             var geocoder = new google.maps.Geocoder();
@@ -119,11 +123,12 @@ $(document).on("pageshow", "#inicial", function() {
         google.maps.event.trigger(map, "resize");
         map.setCenter(center);
 
-        if (listaOcorrencias.length > 0) {
+        buscarMinhasOcorrencias();
+        /*if (listaOcorrencias.length > 0) {
             colocaMarcadoresMapa();
         } else {
             buscarMinhasOcorrencias();
-        }
+        }*/
     }
 });
 
@@ -160,7 +165,8 @@ function realizaLogin(){
                     // armazenando os dados                    
                     window.localStorage.setItem("email_usuario", data.pessoa[0].email);
                     window.localStorage.setItem("senha_usuario", $("#senha").val());
-
+                    $("#email").val("");
+                    $("#senha").val("");                  
                     // buscando os tipos de ocorrencia
                     buscaTipoOcorrencias();                                                
                 } else {
@@ -173,7 +179,14 @@ function realizaLogin(){
 
             // retorno de erro da chamada
             error: function(jqXHR, exception) {
-                trataErroSincronizacao(jqXHR, exception);
+                // escondendo o loading
+                $.mobile.loading( "hide" ); 
+                // solicita ao usuário informar um login e uma senha                
+                navigator.notification.alert(
+                    'Email e/ou senha incorretos!',
+                    function(){},
+                    'Atenção!',
+                    'Fechar');     
                 return;
             }
         });
@@ -260,56 +273,54 @@ function buscaTipoOcorrencias(){
 /**
 * Realiza a busca das ocorrencias
 */
-function buscarMinhasOcorrencias(){
-    // verificando se já buscou as ocorrencias
-    if (listaOcorrencias.length == 0){
-        // verificando se tem ocorrencias para o usuario
-        $.mobile.loading( "show", {
-           // text: "Aguarde! Sincronizando dados...",
-            textVisible: false,
-            theme: "a",
-            textonly: false,
-            html: ""
-        });        
+function buscarMinhasOcorrencias(){  
+    // verificando se tem ocorrencias para o usuario
+    $.mobile.loading( "show", {
+       // text: "Aguarde! Sincronizando dados...",
+        textVisible: false,
+        theme: "a",
+        textonly: false,
+        html: ""
+    });        
 
-        // gerando o token para o acesso ao servidor
-        token = gerarTokenSync(window.localStorage.getItem("email_usuario"), window.localStorage.getItem("senha_usuario"));
+    // gerando o token para o acesso ao servidor
+    token = gerarTokenSync(window.localStorage.getItem("email_usuario"), window.localStorage.getItem("senha_usuario"));
 
-        var urlSyncOcorrencia = urlSync + "ocorrencia?token=" + token + "(" + window.localStorage.getItem("email_usuario") + ")";
+    var urlSyncOcorrencia = urlSync + "ocorrencia?token=" + token + "(" + window.localStorage.getItem("email_usuario") + ")";
 
-        // realiza a chamada no servidor
-        $.ajax({
-            url: urlSyncOcorrencia,
-            type: 'GET',
-            async: false,
-            cache: false,
-            timeout: 90000,        
-            // retorno de sucesso da chamada
-            success: function( data ) {
-                if (data.ocorrencia != null){                    
-                    // exibindo os marcadores no mapa
-                    $.each(data.ocorrencia, function(index, ocorrencia) {    
-                        listaOcorrencias.push(ocorrencia);  
-                        colocaMarcadoresMapa();                              
-                    });
+    // realiza a chamada no servidor
+    $.ajax({
+        url: urlSyncOcorrencia,
+        type: 'GET',
+        async: false,
+        cache: false,
+        timeout: 90000,        
+        // retorno de sucesso da chamada
+        success: function( data ) {
+            listaOcorrencias = [];
+            if (data.ocorrencia != null){                    
+                // exibindo os marcadores no mapa
+                $.each(data.ocorrencia, function(index, ocorrencia) {    
+                    listaOcorrencias.push(ocorrencia);                                                  
+                });
 
-                    $.mobile.loading( "hide" ); 
-                    
-                } else {
-                    // retornando que ouve um erro
-                    data = $.parseJSON(data);
-                    exibeErroSincronizar(data);
-                    return;          
-                }
-            },
-
-            // retorno de erro da chamada
-            error: function(jqXHR, exception) {
-                trataErroSincronizacao(jqXHR, exception);
-                return;
+                colocaMarcadoresMapa(); 
+                $.mobile.loading( "hide" ); 
+                
+            } else {
+                // retornando que ouve um erro
+                data = $.parseJSON(data);
+                exibeErroSincronizar(data);
+                return;          
             }
-        });
-    }
+        },
+
+        // retorno de erro da chamada
+        error: function(jqXHR, exception) {
+            trataErroSincronizacao(jqXHR, exception);
+            return;
+        }
+    });    
 }
 
 /**
@@ -564,7 +575,8 @@ $(document).on("pageshow", "#ocorrencia", function() {
 *
 */
 $(document).on("pageshow", "#novaOcorrencia", function() {    
-    $("#endereco").text(enderecoOcorrencia);
+    $("#endereco").val(enderecoOcorrencia);
+    $("#endereco").textinput({ disabled: true });
     // removendo possiveis valores    
     $("#tipoOcorrencia").find("option").remove().end();
     // inserindo a opção [Selecione]
@@ -654,6 +666,10 @@ function realizaCadastro(){
             // armazenando os dados            
             window.localStorage.setItem("email_usuario", data.pessoa.email);
             window.localStorage.setItem("senha_usuario", $("#senhaCad").val());
+
+            $("#senhaCad").val("");
+            $("#nomeCad").val("");
+            $("#emailCad").val("");
 
             // buscando os tipos de ocorrencia
             buscaTipoOcorrencias();                                    
@@ -746,14 +762,11 @@ function capturarSuccess(imageData) {
 
   var img = document.getElementById('fotoOcorrencia');
 
-  // Unhide image elements
-  //
-  img.style.display = 'block';
-
   // Show the captured photo
   // The inline CSS rules are used to resize the image
   //
-  img.src = "data:image/jpeg;base64," + imageData;  
+  img.innerHTML = '<img src="data:image/jpeg;base64,' 
+    + imageData + '" />';
 }
 
 // erro de captura da foto
@@ -764,4 +777,95 @@ function capturarFail(message) {
       'Erro!',
       'Fechar'
   );
+}
+
+/**
+* Faz o envio da ocorrencia
+*/
+function enviarOcorrencia(){
+ // verificando se informou os dados obrigatorios
+    if ($("#tipoOcorrencia option:selected").val() == 0){ 
+        navigator.notification.alert(
+            'Você deve informar o tipo da ocorrência!',
+            function(){},
+            'Atenção!',
+            'Fechar');       
+        return false;        
+    }
+
+    if ($("#observacao").val() == ""){
+        navigator.notification.alert(
+            'Você deve informar o que está acontecendo!',
+            function(){},
+            'Atenção!',
+            'Fechar');       
+        return false;  
+    }
+
+    // gerando o token para o acesso ao servidor
+    token = gerarTokenSync(window.localStorage.getItem("email_usuario"), 
+        window.localStorage.getItem("senha_usuario"));    
+
+    // gerando a url de envio dos dados
+    var urlSyncOcorrenciaCad = urlSync + "ocorrencia?token=" + token + "(" + window.localStorage.getItem("email_usuario") + ")";
+
+    var ocorrencia = new Object();
+    var pessoa = new Object();
+    var tipoOcorrencia = new Object();
+    tipoOcorrencia.id = $("#tipoOcorrencia option:selected").val();
+    tipoOcorrencia.descricao = $("#tipoOcorrencia option:selected").text();
+    pessoa.email = window.localStorage.getItem("email_usuario");
+    ocorrencia.pessoa = pessoa;
+    ocorrencia.tipoOcorrencia = tipoOcorrencia;
+    ocorrencia.observacao = $("#observacao").val();    
+    ocorrencia.fotoApp =  $("#fotoOcorrencia").find("img").prop("src");
+    ocorrencia.latitude = latitude;
+    ocorrencia.longitude = longitude;
+
+    // transformando o objeto em uma string json
+    var obj = JSON.stringify({ ocorrencia: ocorrencia });            
+    // enviando os dados
+    $.ajax({
+        url: urlSyncOcorrenciaCad,
+        type: 'POST',
+        contentType: "application.mob/json; charset=utf-8",
+        data: obj,
+        async: false,
+        dataType: 'json',        
+        success: function (data) {
+
+            listaOcorrencias.push(data.ocorrencia);
+            
+            navigator.notification.alert(
+                'Ocorrência enviada com sucesso!\n' + 
+                'PROTOCOLO\n' +
+                data.ocorrencia.protocolo,
+                function(){},
+                'Atenção!',
+                'Fechar');               
+
+            $.mobile.changePage("inicial.html");  
+        },
+        
+        // retorno de erro da chamada
+        error: function(jqXHR, exception) {
+            trataErroSincronizacao(jqXHR, exception);
+            return false;
+        }
+
+    });      
+}
+
+function sair(){
+    // armazenando os dados                    
+    window.localStorage.setItem("email_usuario", "");
+    window.localStorage.setItem("senha_usuario", "");   
+    listaOcorrencias = [];
+    listaTipoOcorrencias = [];
+    enderecoOcorrencia = "";
+    latitude = "";
+    longitude = "";  
+
+     $.mobile.changePage("index.html");    
+
 }
